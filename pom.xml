@@ -17,10 +17,17 @@
 	</properties>
 
 	<dependencies>
+		<!-- dropwizard dependencies -->
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
             <version>${dropwizard.version}</version>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>io.dropwizard</groupId>
+		            <artifactId>dropwizard-logging</artifactId>
+		        </exclusion>
+		    </exclusions>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -43,18 +50,43 @@
             <version>${dropwizard.version}</version>
             <type>pom</type>
         </dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.sun.jersey.contribs</groupId> -->
-<!-- 			<artifactId>jersey-multipart</artifactId> -->
-<!-- 			<version>1.18</version> -->
-<!-- 		</dependency>         -->
+
+		<!-- openOffice dependencies -->
+		<dependency>
+		    <groupId>com.artofsolving</groupId>
+		    <artifactId>jodconverter</artifactId>
+		    <version>2.2.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>net.sf.jodreports</groupId>
+		    <artifactId>jodreports</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.6</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.7.6</version>
+		    <scope>runtime</scope>
+		</dependency>
 	</dependencies>
+	
 
 	<build>
 		<plugins>

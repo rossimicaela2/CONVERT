@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import ar.workInHouse.DocumentTranslate.model.Message;
 
-// imports...
  
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)

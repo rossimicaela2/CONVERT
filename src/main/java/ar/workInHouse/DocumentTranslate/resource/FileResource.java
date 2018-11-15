@@ -3,8 +3,11 @@ package ar.workInHouse.DocumentTranslate.resource;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import ar.workInHouse.DocumentTranslate.utils.OpenOffice;
+
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +20,7 @@ import java.io.*;
 @Path("/files")
 @Produces(MediaType.APPLICATION_JSON)
 public class FileResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileResource.class);
+	//private static final Logger LOGGER = LoggerFactory.getLogger(FileResource.class);
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -26,7 +29,14 @@ public class FileResource {
             @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
         // TODO: uploadFileLocation should come from config.yml
         String uploadedFileLocation = File.separator + "home" + File.separator + "dgonzalez" + File.separator + fileDetail.getFileName();
-        LOGGER.info(uploadedFileLocation);
+        //LOGGER.info(uploadedFileLocation);
+        
+        try {
+			OpenOffice.getInstance().open(new File(uploadedFileLocation), new File("testConvert.pdf"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // save it
         writeToFile(uploadedInputStream, uploadedFileLocation);
         String output = "File uploaded to : " + uploadedFileLocation;
