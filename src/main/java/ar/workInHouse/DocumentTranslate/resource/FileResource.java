@@ -29,10 +29,11 @@ public class FileResource {
             @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
         // TODO: uploadFileLocation should come from config.yml
         String uploadedFileLocation = File.separator + "home" + File.separator + "dgonzalez" + File.separator + fileDetail.getFileName();
+        String outPut = File.separator + "home" + File.separator + "dgonzalez" + File.separator;
         //LOGGER.info(uploadedFileLocation);
         
         try {
-			OpenOffice.getInstance().open(new File(uploadedFileLocation), new File("testConvert.pdf"));
+			OpenOffice.getInstance().open(new File(uploadedFileLocation), new File(outPut+"testConvert.pdf"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
