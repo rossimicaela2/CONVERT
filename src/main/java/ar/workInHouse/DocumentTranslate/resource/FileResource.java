@@ -12,6 +12,10 @@ import ar.workInHouse.DocumentTranslate.utils.OpenOffice;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 
 /**
@@ -20,7 +24,7 @@ import java.io.*;
 @Path("/files")
 @Produces(MediaType.APPLICATION_JSON)
 public class FileResource {
-	//private static final Logger LOGGER = LoggerFactory.getLogger(FileResource.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileResource.class);
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -30,17 +34,17 @@ public class FileResource {
         // TODO: uploadFileLocation should come from config.yml
         String uploadedFileLocation = File.separator + "home" + File.separator + "dgonzalez" + File.separator + fileDetail.getFileName();
         String outPut = File.separator + "home" + File.separator + "dgonzalez" + File.separator;
-        //LOGGER.info(uploadedFileLocation);
         
         try {
 			OpenOffice.getInstance().open(new File(uploadedFileLocation), new File(outPut+"testConvert.pdf"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			LOGGER.error("Error al ejecutar la conversion: ",e);
 			e.printStackTrace();
 		}
-        // save it
+
         writeToFile(uploadedInputStream, uploadedFileLocation);
         String output = "File uploaded to : " + uploadedFileLocation;
+        
         return Response.ok(output).build();
     }
 
