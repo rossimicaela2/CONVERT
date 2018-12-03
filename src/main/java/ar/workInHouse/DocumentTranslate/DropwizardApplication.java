@@ -8,7 +8,6 @@ import javax.servlet.FilterRegistration;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 
 import ar.workInHouse.DocumentTranslate.resource.FileResource;
-import ar.workInHouse.DocumentTranslate.resource.MessageResource;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -27,7 +26,6 @@ public class DropwizardApplication extends Application<DropwizardConfig> {
 	@Override
 	public void run(DropwizardConfig arg0, Environment environment) throws Exception {
 		configureCors(environment);
-		environment.jersey().register(new MessageResource());
 		environment.jersey().register(new FileResource());
 		
 	}
